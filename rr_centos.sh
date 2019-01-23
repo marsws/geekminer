@@ -1,15 +1,15 @@
 #!/bin/bash
-################ ÈËÈËÓ°ÊÓÒ»¼ü½Å±¾ ##################"
-#°²×°ÈËÈËÓ°ÊÓ
+################ äººäººå½±è§†ä¸€é”®è„šæœ¬ ##################"
+#å®‰è£…äººäººå½±è§†
 function install_rrys(){
 	while :; do
-		echo -e "ÇëÊäÈëÈËÈËÓ°ÊÓ¶Ë¿Ú ["$magenta"1-65535"$none"]"
-		read -p "$(echo -e "(Ä¬ÈÏ¶Ë¿Ú: 3001):")" port
+		echo -e "è¯·è¾“å…¥äººäººå½±è§†ç«¯å£ ["$magenta"1-65535"$none"]"
+		read -p "$(echo -e "(é»˜è®¤ç«¯å£: 3001):")" port
 		[[ -z "$port" ]] && port="3001"
 		case $port in
 			[1-9] | [1-9][0-9] | [1-9][0-9][0-9] | [1-9][0-9][0-9][0-9] | [1-5][0-9][0-9][0-9][0-9] | 6[0-4][0-9][0-9][0-9] | 65[0-4][0-9][0-9] | 655[0-3][0-5])
 		echo
-		echo -e "ÖØÐÂÉè¶¨¶Ë¿Ú = $port"
+		echo -e "é‡æ–°è®¾å®šç«¯å£ = $port"
 		echo "----------------------------------------------------------------"
 			break
 			;;
@@ -20,10 +20,10 @@ function install_rrys(){
 	done
 cd /home/
 wget https://appdown.rrysapp.com/rrshareweb_centos7.tar.gz
-#½âÑ¹
+#è§£åŽ‹
 tar -zxvf rrshareweb_centos7.tar.gz
 rm -rf rrshareweb_centos7.tar.gz WEB*.png
-#ÐÞ¸ÄÄ¬ÈÏ¶Ë¿Ú
+#ä¿®æ”¹é»˜è®¤ç«¯å£
 cat > /home/rrshareweb/conf/rrshare.json <<EOF
       {
       "port" : $port,
@@ -34,7 +34,7 @@ cat > /home/rrshareweb/conf/rrshare.json <<EOF
       "defaultsavepath" : "/home"
       }
 EOF
-#Éè¶¨ºóÌ¨ÔËÐÐ¼°¿ª»ú×ÔÆô
+#è®¾å®šåŽå°è¿è¡ŒåŠå¼€æœºè‡ªå¯
 if [[ -f /home/rrshareweb/rrshareweb ]]; then
 cat > /etc/systemd/system/renren.service <<EOF
 [Unit]
@@ -58,36 +58,36 @@ systemctl enable renren
 systemctl start renren
 
 else
-echo -e "\n$red °²×°³ö´íÀ²...$none\n" && exit 1
+echo -e "\n$red å®‰è£…å‡ºé”™å•¦...$none\n" && exit 1
 fi
 
-#»ñÈ¡IP
+#èŽ·å–IP
 osip=$(curl https://api.ip.sb/ip)
 echo "------------------------------------------------------"
 echo
-echo "¹§Ï²£¬°²×°Íê³É¡£Çë·ÃÎÊ£ºhttp://${osip}:$port$none"
+echo "æ­å–œï¼Œå®‰è£…å®Œæˆã€‚è¯·è®¿é—®ï¼šhttp://${osip}:$port$none"
 echo
-echo "µã»÷ÉèÖÃ£¬ÐÞ¸ÄÏÂÔØÄ¿Â¼"
+echo "ç‚¹å‡»è®¾ç½®ï¼Œä¿®æ”¹ä¸‹è½½ç›®å½•"
 echo
-echo "²»Í¬VPSÇë¿ªÆôÈëÕ¾ÏàÓ¦¶Ë¿Ú"
+echo "ä¸åŒVPSè¯·å¼€å¯å…¥ç«™ç›¸åº”ç«¯å£"
 echo "------------------------------------------------------"
 }
-echo "##########»¶Ó­Ê¹ÓÃÈËÈËÓ°ÊÓwebÒ»¼ü°²×°½Å±¾##########"
-echo "1.°²×°ÈËÈËÓ°ÊÓlinux"
-echo "2.Ð¶ÔØÈËÈËÓ°ÊÓlinux"
-echo "3.°²×°ÈñËÙ&BBR"
-echo "4.ÍË³ö"
+echo "##########æ¬¢è¿Žä½¿ç”¨äººäººå½±è§†webä¸€é”®å®‰è£…è„šæœ¬##########"
+echo "1.å®‰è£…äººäººå½±è§†linux"
+echo "2.å¸è½½äººäººå½±è§†linux"
+echo "3.å®‰è£…é”é€Ÿ&BBR"
+echo "4.é€€å‡º"
 declare -i stype
-read -p "ÇëÊäÈëÑ¡Ïî:£¨1.2.3.4£©:" stype
+read -p "è¯·è¾“å…¥é€‰é¡¹:ï¼ˆ1.2.3.4ï¼‰:" stype
 if [ "$stype" == 1 ]
 then
-#¼ì²éÄ¿Â¼ÊÇ·ñ´æÔÚ
+#æ£€æŸ¥ç›®å½•æ˜¯å¦å­˜åœ¨
 if [ -e "/home/rrshareweb" ]
 then
-echo "Ä¿Â¼´æÔÚ£¬Çë¼ì²éÊÇ·ñÒÑ¾­°²×°¡£"
+echo "ç›®å½•å­˜åœ¨ï¼Œè¯·æ£€æŸ¥æ˜¯å¦å·²ç»å®‰è£…ã€‚"
 exit
 else
-#Ö´ÐÐ°²×°º¯Êý
+#æ‰§è¡Œå®‰è£…å‡½æ•°
 install_rrys
 fi
 	elif [ "$stype" == 2 ]
@@ -96,11 +96,11 @@ fi
 		systemctl stop rr
 			rm -rf /home/rrshareweb
 			rm -rf /etc/systemd/system/rr.service 
-			echo 'Ð¶ÔØÍê³É.'
+			echo 'å¸è½½å®Œæˆ.'
 			exit
 	elif [ "$stype" == 3 ]
 		then
 			exit
 	else
-		echo "²ÎÊý´íÎó£¡"
+		echo "å‚æ•°é”™è¯¯ï¼"
 	fi	
